@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Auto_Layout_Practice" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOT-HG-STR" userLabel="Top VIew">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
+                                <color key="backgroundColor" red="0.036236416548490524" green="0.9721112847328186" blue="0.86769133806228638" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8QY-FM-FTF" userLabel="Bot View">
+                                <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
+                                <color key="backgroundColor" red="0.99939495325088501" green="0.0012684438843280077" blue="0.36573323607444763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="pOT-HG-STR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5Re-kw-EPE"/>
+                            <constraint firstItem="8QY-FM-FTF" firstAttribute="top" secondItem="pOT-HG-STR" secondAttribute="bottom" id="9Cb-yf-yli"/>
+                            <constraint firstItem="8QY-FM-FTF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EKk-uR-xxI"/>
+                            <constraint firstAttribute="trailing" secondItem="8QY-FM-FTF" secondAttribute="trailing" id="JsU-8h-S3S"/>
+                            <constraint firstItem="8QY-FM-FTF" firstAttribute="height" secondItem="pOT-HG-STR" secondAttribute="height" id="SWk-nh-FIX"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8QY-FM-FTF" secondAttribute="bottom" id="T6s-nc-jmg"/>
+                            <constraint firstItem="pOT-HG-STR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="aVu-AU-wBh"/>
+                            <constraint firstAttribute="trailing" secondItem="pOT-HG-STR" secondAttribute="trailing" id="aXv-hm-WiI"/>
+                            <constraint firstItem="8QY-FM-FTF" firstAttribute="top" secondItem="pOT-HG-STR" secondAttribute="bottom" id="daV-3p-stH"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>
