@@ -16,7 +16,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     // Declare instance variables here
-
+    var messageArr : [Message] = [Message]()
     
     // We've pre-linked the IBOutlets
     @IBOutlet var heightConstraint: NSLayoutConstraint!
@@ -24,7 +24,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var messageTextfield: UITextField!
     @IBOutlet var messageTableView: UITableView!
     var keyboardHeight : CGFloat = 0
-    
     
     
     override func viewDidLoad() {
@@ -47,6 +46,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         //TODO: Register your MessageCell.xib file here:
         messageTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
         configureTableView()
+        retrieveMessages()
         
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyBoard), name: Notification.Name.UIKeyboardWillHide, object: nil)
 
@@ -92,8 +92,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
         
-        let messageArr = ["first message", "seconde", "thrid msg"]
-        cell.messageBody.text = messageArr[indexPath.row]
+        cell.messageBody.text = messageArr[indexPath.row].messageBody
+        cell.senderUsername.text = messageArr[indexPath.row].sender
+        cell.avatarImageView.image = UIImage(named: "egg")
         
         return cell
         
@@ -103,7 +104,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //TODO: Declare numberOfRowsInSection here:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return messageArr.count
     }
     
     
@@ -163,14 +164,43 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func sendPressed(_ sender: AnyObject) {
         
-        
+        messageTextfield.endEditing(true)
         //TODO: Send the message to Firebase and save it in our database
+        messageTextfield.isEnabled = false
+        sendButton.isEnabled = false
         
+        let messageDB = FIRDatabase.database().reference().child("Messages")
+        let messageDict = ["Sender" : FIRAuth.auth()?.currentUser?.email, "MessageBody" : messageTextfield.text!]
+        messageDB.childByAutoId().setValue(messageDict) {
+            (error, ref) in
+            if error != nil {
+                print(error)
+            }
+            else {
+                self.messageTextfield.isEnabled = true
+                self.sendButton.isEnabled = true
+                self.messageTextfield.text = ""
+            }
+        }
         
     }
     
     //TODO: Create the retrieveMessages method here:
-    
+    func retrieveMessages () {
+        let messageDB = FIRDatabase.database().reference().child("Messages")
+        messageDB.observe(.childAdded) { (snapshot) in
+            let snapshotVal = snapshot.value as! Dictionary<String, String>
+            let text = snapshotVal["MessageBody"]!
+            let sender = snapshotVal["Sender"]!
+//            print(text, sender)
+            let message = Message()
+            message.messageBody = text
+            message.sender = sender
+            self.messageArr.append(message)
+            self.configureTableView()
+            self.messageTableView.reloadData()
+        }
+    }
     
 
     

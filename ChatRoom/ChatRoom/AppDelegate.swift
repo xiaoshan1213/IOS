@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //TODO: Initialise and Configure your Firebase here:
         FIRApp.configure()
         
-        let myDataBase = FIRDatabase.database().reference()
-        myDataBase.setValue("test data")
         
         return true
     }
